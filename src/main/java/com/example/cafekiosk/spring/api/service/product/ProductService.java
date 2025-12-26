@@ -20,7 +20,7 @@ public class ProductService {
         List<Product> sellingProducts = productRepository.findAllBySellingStatusIn(ProductSellingStatus.forDisplay());
 
         return sellingProducts.stream()
-                .map(ProductResponse::of)
+                .map(ProductResponse::from)
                 .collect(Collectors.toList());
     }
 
