@@ -1,5 +1,6 @@
 package com.example.cafekiosk.spring.domain.product;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,33 +22,18 @@ class ProductRepositoryTest {
     @Autowired
     private ProductRepository productRepository;
 
+    @AfterEach
+    void tearDown() {
+        productRepository.deleteAllInBatch();
+    }
+
     @DisplayName("키오스크 화면에 보여줄 상품 목록을 조회한다.")
     @Test
     void getSellingProducts() {
         // given
-        Product product1 = Product.builder()
-                .productNumber("001")
-                .type(HANDMADE)
-                .sellingStatus(SELLING)
-                .name("아메리카노")
-                .price(2000)
-                .build();
-
-        Product product2 = Product.builder()
-                .productNumber("002")
-                .type(HANDMADE)
-                .sellingStatus(HOLD)
-                .name("카페라떼")
-                .price(3000)
-                .build();
-
-        Product product3 = Product.builder()
-                .productNumber("003")
-                .type(BAKERY)
-                .sellingStatus(STOP_SELLING)
-                .name("크루아상")
-                .price(3500)
-                .build();
+        Product product1 = createProduct("001", 2000, HANDMADE, SELLING);
+        Product product2 = createProduct("002", 3000, HANDMADE, HOLD);
+        Product product3 = createProduct("003", 3500, BAKERY, STOP_SELLING);
 
         productRepository.saveAll(List.of(product1, product2, product3));
 
@@ -57,11 +43,45 @@ class ProductRepositoryTest {
         // then
         assertThat(sellingProducts).hasSize(2);
         assertThat(sellingProducts)
-                .extracting("productNumber", "name", "sellingStatus")
+                .extracting("productNumber", "sellingStatus")
                 .containsExactlyInAnyOrder(
-                        tuple("001", "아메리카노", SELLING),
-                        tuple("002", "카페라떼", HOLD)
+                        tuple("001", SELLING),
+                        tuple("002", HOLD)
                 );
+    }
+
+    @DisplayName("상품 번호 리스트로, 상품을 조회한다.")
+    @Test
+    void getProductsByProductNumbers() {
+        // given
+        Product product1 = createProduct("001", 2000, HANDMADE, SELLING);
+        Product product2 = createProduct("002", 3000, HANDMADE, HOLD);
+        Product product3 = createProduct("003", 3500, BAKERY, STOP_SELLING);
+
+        productRepository.saveAll(List.of(product1, product2, product3));
+
+        // when
+        List<Product> sellingProducts = productRepository.findAllByProductNumberIn(List.of("001", "002"));
+
+        // then
+        assertThat(sellingProducts).hasSize(2);
+        assertThat(sellingProducts)
+                .extracting("productNumber", "sellingStatus")
+                .containsExactlyInAnyOrder(
+                        tuple("001", SELLING),
+                        tuple("002", HOLD)
+                );
+    }
+
+    private Product createProduct(String productNumber, int price, ProductType type, ProductSellingStatus sellingStatus) {
+        return Product.builder()
+                .productNumber(productNumber)
+                .type(type)
+                .sellingStatus(sellingStatus)
+                .price(price)
+                .name("Product Name")
+                .build();
+
     }
 
 }
