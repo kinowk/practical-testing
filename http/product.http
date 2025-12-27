@@ -1,0 +1,2 @@
+### 키오스크 화면에 보여줄 상품 조회
+GET localhost:8080/api/v1/products/selling
