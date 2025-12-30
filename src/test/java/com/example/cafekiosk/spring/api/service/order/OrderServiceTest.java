@@ -9,7 +9,7 @@ import com.example.cafekiosk.spring.domain.product.ProductRepository;
 import com.example.cafekiosk.spring.domain.product.ProductType;
 import com.example.cafekiosk.spring.domain.stock.Stock;
 import com.example.cafekiosk.spring.domain.stock.StockRepository;
-import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,6 @@ import static com.example.cafekiosk.spring.domain.product.ProductType.*;
 import static org.assertj.core.api.Assertions.*;
 
 @ActiveProfiles("test")
-@Transactional
 @SpringBootTest
 class OrderServiceTest {
 
@@ -43,12 +42,13 @@ class OrderServiceTest {
     @Autowired
     private OrderService orderService;
 
-//    @AfterEach
-//    void tearDown() {
-//        orderProductRepository.deleteAllInBatch();
-//        productRepository.deleteAllInBatch();
-//        orderRepository.deleteAllInBatch();
-//    }
+    @AfterEach
+    void tearDown() {
+        orderProductRepository.deleteAllInBatch();
+        productRepository.deleteAllInBatch();
+        orderRepository.deleteAllInBatch();
+        stockRepository.deleteAllInBatch();
+    }
 
     @DisplayName("상품 번호 리스트를 받아, 주문을 생성한다.")
     @Test
