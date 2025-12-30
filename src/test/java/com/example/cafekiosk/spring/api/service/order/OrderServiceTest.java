@@ -64,7 +64,7 @@ class OrderServiceTest {
                 .map(Product::getProductNumber)
                 .toList();
 
-        OrderCreateRequest orderCreateRequest = new OrderCreateRequest(productNumbers, registeredAt);
+        OrderCreateRequest orderCreateRequest = new OrderCreateRequest(productNumbers);
 
         // when
         OrderResponse orderResponse = orderService.createOrder(orderCreateRequest, registeredAt);
@@ -94,7 +94,7 @@ class OrderServiceTest {
 
         productRepository.saveAll(List.of(product1, product2, product3));
 
-        OrderCreateRequest orderCreateRequest = new OrderCreateRequest(List.of("001", "001"), registeredAt);
+        OrderCreateRequest orderCreateRequest = new OrderCreateRequest(List.of("001", "001"));
 
         // when
         OrderResponse orderResponse = orderService.createOrder(orderCreateRequest, registeredAt);
@@ -126,7 +126,7 @@ class OrderServiceTest {
         Stock stock2 = Stock.create("002", 2);
         stockRepository.saveAll(List.of(stock1, stock2));
 
-        OrderCreateRequest orderCreateRequest = new OrderCreateRequest(List.of("001", "001", "002", "003"), registeredAt);
+        OrderCreateRequest orderCreateRequest = new OrderCreateRequest(List.of("001", "001", "002", "003"));
 
         // when
         OrderResponse orderResponse = orderService.createOrder(orderCreateRequest, registeredAt);
@@ -168,7 +168,7 @@ class OrderServiceTest {
         Stock stock2 = Stock.create("002", 2);
         stockRepository.saveAll(List.of(stock1, stock2));
 
-        OrderCreateRequest orderCreateRequest = new OrderCreateRequest(List.of("001", "001", "002", "003"), registeredAt);
+        OrderCreateRequest orderCreateRequest = new OrderCreateRequest(List.of("001", "001", "002", "003"));
 
         // when & then
         assertThatThrownBy(() -> orderService.createOrder(orderCreateRequest, registeredAt))
