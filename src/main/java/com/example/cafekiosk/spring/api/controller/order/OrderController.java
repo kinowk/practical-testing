@@ -3,6 +3,7 @@ package com.example.cafekiosk.spring.api.controller.order;
 import com.example.cafekiosk.spring.api.ApiResponse;
 import com.example.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import com.example.cafekiosk.spring.api.service.order.OrderService;
+import com.example.cafekiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import com.example.cafekiosk.spring.api.service.order.response.OrderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,8 @@ public class OrderController {
     @PostMapping("/api/v1/orders/new")
     public ApiResponse<OrderResponse> createOrder(@Valid @RequestBody OrderCreateRequest request) {
         LocalDateTime registeredAt = LocalDateTime.now();
-        OrderResponse response = orderService.createOrder(request, registeredAt);
+        OrderCreateServiceRequest serviceRequest = request.toServiceRequest();
+        OrderResponse response = orderService.createOrder(serviceRequest, registeredAt);
         return ApiResponse.ok(response);
     }
 }

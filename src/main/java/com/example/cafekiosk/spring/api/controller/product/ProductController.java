@@ -3,6 +3,7 @@ package com.example.cafekiosk.spring.api.controller.product;
 import com.example.cafekiosk.spring.api.ApiResponse;
 import com.example.cafekiosk.spring.api.controller.product.request.ProductCreateRequest;
 import com.example.cafekiosk.spring.api.service.product.ProductService;
+import com.example.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import com.example.cafekiosk.spring.api.service.product.response.ProductResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,8 @@ public class ProductController {
 
     @PostMapping("/api/v1/products/new")
     public ApiResponse<ProductResponse> createProduct(@Valid @RequestBody ProductCreateRequest request) {
-        ProductResponse response = productService.createProduct(request);
+        ProductCreateServiceRequest serviceRequest = request.toServiceRequest();
+        ProductResponse response = productService.createProduct(serviceRequest);
         return ApiResponse.ok(response);
     }
 

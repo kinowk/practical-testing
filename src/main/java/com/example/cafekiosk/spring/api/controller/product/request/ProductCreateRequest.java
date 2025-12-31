@@ -1,6 +1,6 @@
 package com.example.cafekiosk.spring.api.controller.product.request;
 
-import com.example.cafekiosk.spring.domain.product.Product;
+import com.example.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import com.example.cafekiosk.spring.domain.product.ProductSellingStatus;
 import com.example.cafekiosk.spring.domain.product.ProductType;
 import jakarta.validation.constraints.NotBlank;
@@ -14,13 +14,7 @@ public record ProductCreateRequest(
         @PositiveOrZero(message = "가격은 0원 이상이어야 됩니다.") int price
 ) {
 
-    public Product toEntity(String productNumber) {
-        return Product.builder()
-                .productNumber(productNumber)
-                .type(type)
-                .sellingStatus(sellingStatus)
-                .name(name)
-                .price(price)
-                .build();
+    public ProductCreateServiceRequest toServiceRequest() {
+        return new ProductCreateServiceRequest(type, sellingStatus, name, price);
     }
 }
