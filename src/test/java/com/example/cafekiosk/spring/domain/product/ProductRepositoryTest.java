@@ -73,6 +73,31 @@ class ProductRepositoryTest {
                 );
     }
 
+    @DisplayName("가장 마지막 상품의 상품번호를 반환한다.")
+    @Test
+    void findLatestProductNumber() {
+        // given
+        String expectedProductNumber = "001";
+        Product product = createProduct(expectedProductNumber, 2000, HANDMADE, SELLING);
+        productRepository.save(product);
+
+        // when
+        String productNumber = productRepository.findLatestProductNumber();
+
+        // then
+        assertThat(productNumber).isEqualTo(expectedProductNumber);
+    }
+
+    @DisplayName("상품이 없는 경우 상품번호로 null를 반환한다.")
+    @Test
+    void findLatestProductNumberWhenProductIsEmpty() {
+        // when
+        String productNumber = productRepository.findLatestProductNumber();
+
+        // then
+        assertThat(productNumber).isNull();
+    }
+
     private Product createProduct(String productNumber, int price, ProductType type, ProductSellingStatus sellingStatus) {
         return Product.builder()
                 .productNumber(productNumber)
