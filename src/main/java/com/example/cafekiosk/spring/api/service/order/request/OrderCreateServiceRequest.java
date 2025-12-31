@@ -1,0 +1,9 @@
+package com.example.cafekiosk.spring.api.service.order.request;
+
+import java.util.List;
+
+public record OrderCreateServiceRequest(
+        List<String> productNumbers
+) {
+
+}
