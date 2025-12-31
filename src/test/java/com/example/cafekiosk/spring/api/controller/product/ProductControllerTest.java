@@ -1,6 +1,6 @@
 package com.example.cafekiosk.spring.api.controller.product;
 
-import com.example.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import com.example.cafekiosk.spring.api.controller.product.request.ProductCreateRequest;
 import com.example.cafekiosk.spring.api.service.product.ProductService;
 import com.example.cafekiosk.spring.api.service.product.response.ProductResponse;
 import org.junit.jupiter.api.DisplayName;
