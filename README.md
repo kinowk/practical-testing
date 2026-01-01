@@ -131,3 +131,20 @@ REFACTOR: 구현 코드 개선 / 테스트 통과 유지
 
 ### MockMvc
 - Mock(가짜) 객체를 사용해 스프링 MVC 동작을 재현할 수 있는 테스트 프레임워크
+
+### Keyword
+- Layerd Architecture
+- Hexagonal Architecture
+- 단위테스트 vs 통합테스트
+- IoC, DI, AOP
+- ORM, 패러다임의 불일치, Hibernate
+- Spring Data JPA
+- QueryDSL
+- @SpringBootTest vs @DataJpaTest
+- @SpringBootTest vs @WebMvcTest
+- Optimistic Lock, Pessimistic Lock
+- CQRS
+- @RestControllerAdvice, @ExceptionHandler
+- Spring Bean Validation
+  - @NotNull, @NotEmpty, @NotBlank, ...
+- Mock, Mockito, @MockBean
