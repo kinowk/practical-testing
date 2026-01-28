@@ -18,6 +18,7 @@
 - 재고와 관련 있는 상품 타입은 병 음료, 베이커리이다.
 - 관리자 페이지에서 신규 상품을 등록할 수 있다.
 - 상품명, 상품 타입, 판매 상태, 가격 등을 입력받는다.
+- 관리자 페이지에서 일일 매출 통계를 메일로 전송할 수 있다.
 
 ---
 
@@ -148,3 +149,7 @@ REFACTOR: 구현 코드 개선 / 테스트 통과 유지
 - Spring Bean Validation
   - @NotNull, @NotEmpty, @NotBlank, ...
 - Mock, Mockito, @MockBean
+
+---
+
+# Mock
