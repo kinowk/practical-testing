@@ -1,15 +1,10 @@
 package com.example.cafekiosk.spring.api.controller.order;
 
+import com.example.cafekiosk.spring.ControllerTestSupport;
 import com.example.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
-import com.example.cafekiosk.spring.api.service.order.OrderService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.servlet.MockMvc;
-import tools.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
@@ -18,17 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(OrderController.class)
-class OrderControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockitoBean
-    private OrderService orderService;
+class OrderControllerTest extends ControllerTestSupport {
 
     private static final String END_POINT_CREATE_ORDER = "/api/v1/orders/new";
 

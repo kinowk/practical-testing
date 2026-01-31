@@ -1,16 +1,11 @@
 package com.example.cafekiosk.spring.api.controller.product;
 
+import com.example.cafekiosk.spring.ControllerTestSupport;
 import com.example.cafekiosk.spring.api.controller.product.request.ProductCreateRequest;
-import com.example.cafekiosk.spring.api.service.product.ProductService;
 import com.example.cafekiosk.spring.api.service.product.response.ProductResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.servlet.MockMvc;
-import tools.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
@@ -24,17 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@WebMvcTest(ProductController.class)
-class ProductControllerTest {
+class ProductControllerTest extends ControllerTestSupport {
 
-    @Autowired
-    MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockitoBean
-    private ProductService productService;
 
     private static final String END_POINT_CREATE_PRODUCT = "/api/v1/products/new";
     private static final String END_POINT_SELLING_PRODUCTS = "/api/v1/products/selling";
