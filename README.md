@@ -179,3 +179,12 @@ Stub이면서 호출된 내용을 기록하여 보여줄 수 있는 객체
 - @Mock, @MockBean, @Spy, @SpyBean, @InjectMocks
 - BDDMockito
 - Classicist VS Mockist
+- 테스트 하나 당 목적은 하나!
+- 완벽한 제어
+- 테스트 환경의 독립성, 테스트 간 독립성
+- Test Fixture
+- deleteAll(), deleteAllInBatch()
+- @ParameterizedTest, @DynamicTest
+- 수행 환경 통합하기
+- private method test
+- 테스트에서만 필요한 코드
